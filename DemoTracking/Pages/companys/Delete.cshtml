@@ -1,0 +1,41 @@
+﻿@page
+@model DemoTracking.Pages.companys.DeleteModel
+
+@{
+    ViewData["Title"] = "Eliminar";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<h3>¿Esta seguro que desea eliminar el registro?</h3>
+<div>
+    <h4>Empresa</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Company.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Company.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Company.RFC)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Company.RFC)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Company.Status)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Company.Status)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Company.id" />
+        <input type="submit" value="Eliminar" class="btn btn-default" /> |
+        <a asp-page="./Index">Regresar</a>
+    </form>
+</div>

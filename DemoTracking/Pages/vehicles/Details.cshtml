@@ -1,0 +1,104 @@
+﻿@page
+@model DemoTracking.Pages.vehicles.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Vehicle</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Vehicle.Plates)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Vehicle.Plates)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Vehicle.Model)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Vehicle.Model)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Vehicle.Oil)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Vehicle.Oil)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Vehicle.Brakes)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Vehicle.Brakes)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Vehicle.Kit)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Vehicle.Kit)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Vehicle.ShockAbsorber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Vehicle.ShockAbsorber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Vehicle.Tires)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Vehicle.Tires)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Vehicle.Maintenance)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Vehicle.Maintenance)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Vehicle.Ckeck)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Vehicle.Ckeck.id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Vehicle.Tenure)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Vehicle.Tenure)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Vehicle.Safe)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Vehicle.Safe)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Vehicle.User)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Vehicle.User.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Vehicle.Flotilla)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Vehicle.Flotilla.id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Vehicle.Company)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Vehicle.Company.id)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Vehicle.id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

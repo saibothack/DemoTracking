@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DemoTracking.Migrations
 {
     [DbContext(typeof(DemoTrackingContext))]
-    [Migration("20190508163406_CreateIdentitySchema")]
-    partial class CreateIdentitySchema
+    [Migration("20190509120646_Inicial")]
+    partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -39,6 +39,8 @@ namespace DemoTracking.Migrations
                     b.Property<bool>("LockoutEnabled");
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
+
+                    b.Property<string>("Name");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256);
@@ -70,6 +72,208 @@ namespace DemoTracking.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("DemoTracking.Models.Company", b =>
+                {
+                    b.Property<string>("id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime?>("CreationDate");
+
+                    b.Property<DateTime?>("EditionDate");
+
+                    b.Property<string>("EditionOwnerId");
+
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.Property<string>("OwnerId");
+
+                    b.Property<string>("RFC")
+                        .IsRequired();
+
+                    b.Property<int>("Status");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Company");
+                });
+
+            modelBuilder.Entity("DemoTracking.Models.Flotilla", b =>
+                {
+                    b.Property<string>("id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CompanyID");
+
+                    b.Property<DateTime?>("CreationDate");
+
+                    b.Property<DateTime?>("EditionDate");
+
+                    b.Property<string>("EditionOwnerId");
+
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.Property<string>("OwnerId");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("CompanyID");
+
+                    b.ToTable("Flotilla");
+                });
+
+            modelBuilder.Entity("DemoTracking.Models.Maintenance", b =>
+                {
+                    b.Property<string>("id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime?>("CreationDate");
+
+                    b.Property<string>("DateEnd");
+
+                    b.Property<DateTime?>("EditionDate");
+
+                    b.Property<string>("EditionOwnerId");
+
+                    b.Property<string>("OwnerId");
+
+                    b.Property<string>("ProviderID");
+
+                    b.Property<string>("Scheduled")
+                        .IsRequired();
+
+                    b.Property<int>("Status");
+
+                    b.Property<string>("VehicleID");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("ProviderID");
+
+                    b.HasIndex("VehicleID");
+
+                    b.ToTable("Maintenance");
+                });
+
+            modelBuilder.Entity("DemoTracking.Models.Provider", b =>
+                {
+                    b.Property<string>("id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime?>("CreationDate");
+
+                    b.Property<DateTime?>("EditionDate");
+
+                    b.Property<string>("EditionOwnerId");
+
+                    b.Property<string>("Email")
+                        .IsRequired();
+
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.Property<string>("OwnerId");
+
+                    b.Property<string>("Phone")
+                        .IsRequired();
+
+                    b.HasKey("id");
+
+                    b.ToTable("Provider");
+                });
+
+            modelBuilder.Entity("DemoTracking.Models.Vehicles.Ckeck", b =>
+                {
+                    b.Property<string>("id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime?>("CreationDate");
+
+                    b.Property<DateTime?>("EditionDate");
+
+                    b.Property<string>("EditionOwnerId");
+
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.Property<string>("OwnerId");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Ckeck");
+                });
+
+            modelBuilder.Entity("DemoTracking.Models.Vehicles.Type", b =>
+                {
+                    b.Property<string>("id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime?>("CreationDate");
+
+                    b.Property<DateTime?>("EditionDate");
+
+                    b.Property<string>("EditionOwnerId");
+
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.Property<string>("OwnerId");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Type");
+                });
+
+            modelBuilder.Entity("DemoTracking.Models.Vehicles.Vehicle", b =>
+                {
+                    b.Property<string>("id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<double>("Brakes");
+
+                    b.Property<string>("CkeckID");
+
+                    b.Property<string>("CompanyID");
+
+                    b.Property<string>("FlotillaID");
+
+                    b.Property<double>("Kit");
+
+                    b.Property<double>("Maintenance");
+
+                    b.Property<string>("Model")
+                        .IsRequired();
+
+                    b.Property<double>("Oil");
+
+                    b.Property<string>("Plates")
+                        .IsRequired();
+
+                    b.Property<DateTime>("Safe");
+
+                    b.Property<string>("ShockAbsorber")
+                        .IsRequired();
+
+                    b.Property<DateTime>("Tenure");
+
+                    b.Property<double>("Tires");
+
+                    b.Property<string>("UserID");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("CkeckID");
+
+                    b.HasIndex("CompanyID");
+
+                    b.HasIndex("FlotillaID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("Vehicle");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -184,6 +388,43 @@ namespace DemoTracking.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("DemoTracking.Models.Flotilla", b =>
+                {
+                    b.HasOne("DemoTracking.Models.Company", "Company")
+                        .WithMany()
+                        .HasForeignKey("CompanyID");
+                });
+
+            modelBuilder.Entity("DemoTracking.Models.Maintenance", b =>
+                {
+                    b.HasOne("DemoTracking.Models.Provider", "Provider")
+                        .WithMany()
+                        .HasForeignKey("ProviderID");
+
+                    b.HasOne("DemoTracking.Models.Vehicles.Vehicle", "Vehicle")
+                        .WithMany()
+                        .HasForeignKey("VehicleID");
+                });
+
+            modelBuilder.Entity("DemoTracking.Models.Vehicles.Vehicle", b =>
+                {
+                    b.HasOne("DemoTracking.Models.Vehicles.Ckeck", "Ckeck")
+                        .WithMany()
+                        .HasForeignKey("CkeckID");
+
+                    b.HasOne("DemoTracking.Models.Company", "Company")
+                        .WithMany()
+                        .HasForeignKey("CompanyID");
+
+                    b.HasOne("DemoTracking.Models.Flotilla", "Flotilla")
+                        .WithMany()
+                        .HasForeignKey("FlotillaID");
+
+                    b.HasOne("DemoTracking.Areas.Identity.Data.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserID");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

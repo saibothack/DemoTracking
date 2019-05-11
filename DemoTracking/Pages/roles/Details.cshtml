@@ -1,0 +1,25 @@
+@page
+@model DemoTracking.Pages_roles.DetailsModel
+
+@{
+    ViewData["Title"] = "Detalles";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div>
+    <h4>Rol</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Nombre
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Role.Name)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Role.Id">Modificar</a> |
+    <a asp-page="./Index">Regrear</a>
+</div>

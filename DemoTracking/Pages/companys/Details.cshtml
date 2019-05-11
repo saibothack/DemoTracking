@@ -1,0 +1,38 @@
+﻿@page
+@model DemoTracking.Pages.companys.DetailsModel
+
+@{
+    ViewData["Title"] = "Detalles";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div>
+    <h4>Empresa</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Company.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Company.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Company.RFC)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Company.RFC)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Company.Status)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Company.Status)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Company.id">Modificar</a> |
+    <a asp-page="./Index">Regresar</a>
+</div>

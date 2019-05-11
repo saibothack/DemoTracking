@@ -1,19 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace DemoTracking.Models
 {
-    public class Company
+    public class Company : DefaultData
     {
-        public string id { get; set; }
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Nombre de la empresa")]
         public string Name { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "RFC")]
         public string RFC { get; set; }
+
+        [Required]
+        [Display(Name = "Estatus")]
         public CompanyStatus Status { get; set; }
     }
 
-    public enum CompanyStatus {
+    public enum CompanyStatus
+    {
         Activo,
         Inactivo
     }

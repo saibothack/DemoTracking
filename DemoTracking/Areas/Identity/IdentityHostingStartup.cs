@@ -16,12 +16,7 @@ namespace DemoTracking.Areas.Identity
         public void Configure(IWebHostBuilder builder)
         {
             builder.ConfigureServices((context, services) => {
-                services.AddDbContext<DemoTrackingContext>(options =>
-                    options.UseSqlServer(
-                        context.Configuration.GetConnectionString("DemoTrackingContextConnection")));
-
-                services.AddDefaultIdentity<User>()
-                    .AddEntityFrameworkStores<DemoTrackingContext>();
+                
             });
         }
     }

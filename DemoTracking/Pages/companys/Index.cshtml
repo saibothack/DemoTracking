@@ -1,0 +1,130 @@
+﻿@page
+@model DemoTracking.Pages.companys.IndexModel
+
+@{
+    ViewData["Title"] = "Empresas";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h2>Empresas</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <a asp-page="Create" class="btn btn-primary">Crear</a>
+    </div>
+    @using (Html.BeginForm("Index", "companys", FormMethod.Get))
+    {
+        <div class="col-md-4">
+            <div class="form-group row">
+                <label for="staticEmail" class="col-md-2 col-form-label">Buscar</label>
+                <div class="col-md-10">
+                    @Html.TextBox("search", ViewData["CurrentFilter"] as string, new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <input type="submit" value="Buscar" class="btn btn-secondary" />
+        </div>
+    }
+
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]">
+                    @Html.DisplayNameFor(model => model.Company[0].Name)
+                </a>
+            </th>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.RFCSort"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]">
+                    @Html.DisplayNameFor(model => model.Company[0].RFC)
+                </a>
+            </th>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.StatusSort"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]">
+                    @Html.DisplayNameFor(model => model.Company[0].Status)
+                </a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Company)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RFC)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.id">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.id">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@{
+    var prevDisabled = !Model.Company.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Company.HasNextPage ? "disabled" : "";
+}
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        <li class="page-item">
+            <a asp-page="./Index"
+               asp-route-sortOrder="@ViewData["NameSortParm"]"
+               asp-route-pageIndex="@(Model.Company.PageIndex - 1)"
+               asp-route-currentFilter="@ViewData["CurrentFilter"]"
+               class="btn btn-default @prevDisabled">
+                Anterior
+            </a>
+        </li>
+
+        @for (int i = 0; i < Model.itemCount; i++)
+        {
+            @if (Model.Company.PageIndex == (i + 1))
+            {
+                <li class="page-item active">
+                    <span class="page-link">
+                        @(i + 1)
+                        <span class="sr-only">(current)</span>
+                    </span>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link"
+                       asp-page="./Index"
+                       asp-route-sortOrder="@ViewData["NameSortParm"]"
+                       asp-route-pageIndex="@(i + 1)"
+                       asp-route-currentFilter="@ViewData["CurrentFilter"]">@(i + 1)</a>
+                </li>
+            }
+        }
+
+
+        <li class="page-item">
+            <a asp-page="./Index"
+               asp-route-sortOrder="@ViewData["NameSortParm"]"
+               asp-route-pageIndex="@(Model.Company.PageIndex + 1)"
+               asp-route-currentFilter="@ViewData["CurrentFilter"]"
+               class="btn btn-default @nextDisabled">
+                Siguiente
+            </a>
+        </li>
+    </ul>
+</nav>

@@ -1,0 +1,109 @@
+@page
+@model DemoTracking.Pages_roles.IndexModel
+
+@{
+    ViewData["Title"] = "Roles";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <a asp-page="Create" class="btn btn-primary">Crear</a>
+    </div>
+    @using (Html.BeginForm("Index", "roles", FormMethod.Get))
+    {
+        <div class="col-md-4">
+            <div class="form-group row">
+                <label for="staticEmail" class="col-md-2 col-form-label">Buscar</label>
+                <div class="col-md-10">
+                    @Html.TextBox("search", ViewData["CurrentFilter"] as string, new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <input type="submit" value="Buscar" class="btn btn-secondary" />
+        </div>
+    }
+
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.ActionLink("Nombre", "Index", new { sortOrder = ViewData["NameSortParm"] })
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Role)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id">Modificar</a> |
+                    <a asp-page="./Details" asp-route-id="@item.Id">Detalles</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.Id">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+
+@{
+    var prevDisabled = !Model.Role.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Role.HasNextPage ? "disabled" : "";
+}
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        <li class="page-item">
+            <a asp-page="./Index"
+               asp-route-sortOrder="@ViewData["NameSortParm"]"
+               asp-route-pageIndex="@(Model.Role.PageIndex - 1)"
+               asp-route-currentFilter="@ViewData["CurrentFilter"]"
+               class="btn btn-default @prevDisabled">
+                Anterior
+            </a>
+        </li>
+
+        @for (int i = 0; i < Model.RoleCount; i++)
+        {
+            @if (Model.Role.PageIndex == (i + 1))
+            {
+                <li class="page-item active">
+                    <span class="page-link">
+                        @(i + 1)
+                        <span class="sr-only">(current)</span>
+                    </span>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link"
+                       asp-page="./Index"
+                       asp-route-sortOrder="@ViewData["NameSortParm"]"
+                       asp-route-pageIndex="@(i + 1)"
+                       asp-route-currentFilter="@ViewData["CurrentFilter"]">@(i + 1)</a>
+                </li>
+            }
+        }
+
+
+        <li class="page-item">
+            <a asp-page="./Index"
+               asp-route-sortOrder="@ViewData["NameSortParm"]"
+               asp-route-pageIndex="@(Model.Role.PageIndex + 1)"
+               asp-route-currentFilter="@ViewData["CurrentFilter"]"
+               class="btn btn-default @nextDisabled">
+                Siguiente
+            </a>
+        </li>
+    </ul>
+</nav>

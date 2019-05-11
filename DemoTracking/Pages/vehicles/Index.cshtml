@@ -1,0 +1,115 @@
+﻿@page
+@model DemoTracking.Pages.vehicles.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Vehicle[0].Plates)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vehicle[0].Model)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vehicle[0].Oil)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vehicle[0].Brakes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vehicle[0].Kit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vehicle[0].ShockAbsorber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vehicle[0].Tires)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vehicle[0].Maintenance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vehicle[0].Ckeck)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vehicle[0].Tenure)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vehicle[0].Safe)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vehicle[0].User)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vehicle[0].Flotilla)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vehicle[0].Company)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Vehicle) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Plates)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Oil)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Brakes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Kit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShockAbsorber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tires)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Maintenance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ckeck.id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tenure)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Safe)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Flotilla.id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Company.id)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

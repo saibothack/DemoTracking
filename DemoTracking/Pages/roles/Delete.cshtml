@@ -1,0 +1,28 @@
+@page
+@model DemoTracking.Pages_roles.DeleteModel
+
+@{
+    ViewData["Title"] = "Eliminar";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<h3>¿Esta seguro que desea eliminar el registro?</h3>
+<div>
+    <h4>Rol</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Nombre
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Role.Name)
+        </dd>
+    </dl>
+
+    <form method="post">
+        <input type="hidden" asp-for="Role.Id" />
+        <input type="submit" value="Eliminar" class="btn btn-default" /> |
+        <a asp-page="./Index">Regresar</a>
+    </form>
+</div>
